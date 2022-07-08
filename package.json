@@ -1,0 +1,8 @@
+{
+  "name": "node-ts-setup",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/kolynzb/auth-system-ts.git",
+  "author": "kolynzb <collinsbenda360@gmail.com>",
+  "license": "MIT"
+}
