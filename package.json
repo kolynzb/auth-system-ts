@@ -4,5 +4,13 @@
   "main": "server.js",
   "repository": "https://github.com/kolynzb/auth-system-ts.git",
   "author": "kolynzb <collinsbenda360@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "volta": {
+    "node": "16.16.0",
+    "yarn": "1.22.19"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.0.3"
+  }
 }
