@@ -10,6 +10,8 @@
     "yarn": "1.22.19"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.210",
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.0.3"
   }
