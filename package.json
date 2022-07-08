@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf build && swc ./src -d build",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "start:docker": "yarn build && node --inspect=0.0.0.0 build/server.js"
   },
   "volta": {
     "node": "16.16.0",

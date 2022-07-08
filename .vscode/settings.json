@@ -1,3 +1,11 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib"
+  // For tasks restart if your using docker
+  // "triggerTaskOnSave.tasks": {
+  //   "restart backend": ["src/**/*"]
+  // },
+  // "files.watcherExclude": {
+  //   "**/.git/objects/**": true,
+  //   "**/.git/subtree-cache/**": true
+  // }
 }
