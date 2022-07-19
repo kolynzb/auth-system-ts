@@ -1,0 +1,1 @@
+- [Set up node js swc ](https://richbray.medium.com/how-to-set-up-a-node-16-express-typescript-api-1cea73bd83ca)
