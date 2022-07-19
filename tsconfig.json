@@ -2,7 +2,8 @@
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
     "lib": ["ESNext"],
-    "outDir": "build"
+    "outDir": "build",
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/*.test.ts"]

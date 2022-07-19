@@ -1,17 +1,43 @@
-import express from "express";
-import morgan from "morgan";
-import dotenv from "dotenv-safe";
+import config from 'config';
+import app from './app';
+import connectDB from './config/DB.config';
+import log from './utils/logger.util';
 
-dotenv.config();
+const PORT = config.get('port');
+const uri = config.get('dbUri') as string;
+// TODO: add config library
 
-const app = express();
-app.use(morgan("dev")); // logger
+const startServer = async () => {
+  await connectDB(uri);
+  return app.listen(PORT, () => log.info(`listening on port: ${PORT}`));
+};
 
-app.get("/", async (req, res) => {
-  res.json({ hello: "world" });
+let server: any;
+
+startServer().then(serve => {
+  server = serve;
 });
 
-const port = Number(process.env.PORT ?? 8080);
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running at http://localhost:${port}`);
+// For unhandled promise rejections rejections
+process.on('unhandledRejection', (err: any) => {
+  log.info(`${err.name} \n ${err.message}`);
+  log.error('Unhandled rejection 💥 shutting down....');
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+// Handling uncaught exceptions
+process.on('uncaughtException', err => {
+  console.log(err.name, err.message);
+  console.log('Unhandled rejection 💥 shutting down....');
+
+  process.exit(1);
+});
+
+process.on('SIGTERM', () => {
+  console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('💥 Process terminated!');
+  });
 });
