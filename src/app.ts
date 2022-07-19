@@ -5,6 +5,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 // import xss from 'xss-clean';
+import xXssProtection from "x-xss-protection";
 import swaggerUI from "swagger-ui-express";
 import yamlJS from "yamljs";
 import compression from "compression";
@@ -55,6 +56,7 @@ app.use(mongoSanitize());
 
 // Data sanitization against XSS
 // app.use(xss());
+app.use(xXssProtection());
 
 // Prevent parameter pollution
 app.use(
