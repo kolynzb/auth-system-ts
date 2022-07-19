@@ -15,8 +15,8 @@ securityMiddleware(app);
 // API routes
 app.use("/api/v1/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 APIroutes(app);
-// global error handling
 
+// Global Error Handling
 app.all("*", (req, res, next) => {
   next(new AppError(`Cant find ${req.originalUrl}`, 404));
 });
