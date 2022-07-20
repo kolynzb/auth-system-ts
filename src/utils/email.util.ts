@@ -1,8 +1,8 @@
-import nodemailer, { Transporter } from 'nodemailer';
-import pug from 'pug';
-import htmlToText from 'html-to-text';
-import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import { UserDocument } from '../models/user.model';
+import nodemailer, { Transporter } from "nodemailer";
+import pug from "pug";
+import htmlToText from "html-to-text";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
+import { UserDocument } from "../models/user.model";
 
 const {
   EMAIL_FROM,
@@ -15,8 +15,9 @@ const {
 
 interface EmailInterface {
   url: string;
-  to: UserDocument['email'];
-  firstname: UserDocument['username'];
+  to: UserDocument["email"];
+  // firstname: UserDocument['username'];
+  firstname: UserDocument["first_name"];
   from: string;
 }
 
@@ -32,15 +33,16 @@ class Email implements EmailInterface {
   constructor(user: UserDocument, url: string) {
     this.url = url;
     this.to = user.email;
-    this.firstname = user.username;
-    this.from = `Nest Technologies <${EMAIL_FROM}>`;
+    // this.firstname = user.username;
+    this.firstname = user.first_name as string;
+    this.from = `Kolynz Technologies <${EMAIL_FROM}>`;
   }
 
   newTransport(): Transporter<SMTPTransport.SentMessageInfo> {
-    if (NODE_ENV === 'production') {
+    if (NODE_ENV === "production") {
       // SEND GRID
       return nodemailer.createTransport({
-        service: 'SendGrid',
+        service: "SendGrid",
         auth: {
           user: SENDGRID_USERNAME,
           pass: SENDGRID_PASSWORD,
@@ -49,7 +51,7 @@ class Email implements EmailInterface {
     }
     // MAILTRAP
     return nodemailer.createTransport({
-      host: 'smtp.mailtrap.io',
+      host: "smtp.mailtrap.io",
       auth: {
         user: MAILTRAP_USERNAME,
         pass: MAILTRAP_PASSWORD,
@@ -58,11 +60,14 @@ class Email implements EmailInterface {
   }
 
   async send(template: string, subject: string): Promise<void> {
-    const html = pug.renderFile(`${__dirname}/../templates/email/${template}.pug`, {
-      firstName: this.firstname,
-      url: this.url,
-      subject,
-    });
+    const html = pug.renderFile(
+      `${__dirname}/../templates/email/${template}.pug`,
+      {
+        firstName: this.firstname,
+        url: this.url,
+        subject,
+      }
+    );
 
     const mailOptions = {
       from: this.from,
@@ -72,15 +77,20 @@ class Email implements EmailInterface {
       text: htmlToText.convert(html),
     };
 
-    await this.newTransport().sendMail(mailOptions, (err, info) => console.log(err, '......', info));
+    await this.newTransport().sendMail(mailOptions, (err, info) =>
+      console.log(err, "......", info)
+    );
   }
 
   async sendWelcome(): Promise<void> {
-    await this.send('welcome', 'Welcome to the Nest Family!');
+    await this.send("welcome", "Welcome to the Nest Family!");
   }
 
   async sendPasswordReset(): Promise<void> {
-    await this.send('passwordReset', 'Your password reset token (valid for 10 min)');
+    await this.send(
+      "passwordReset",
+      "Your password reset token (valid for 10 min)"
+    );
   }
 }
 

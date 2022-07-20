@@ -1,2 +1,4 @@
 - [Set up node js swc ](https://richbray.medium.com/how-to-set-up-a-node-16-express-typescript-api-1cea73bd83ca)
 - [Logging with Winston](https://www.section.io/engineering-education/logging-with-winston/)
+- [xss alternative](https://openbase.com/js/x-xss-protection)
+- [passport with everything](https://webenviro.com/mern-authentication-with-passport-js-part-1)
