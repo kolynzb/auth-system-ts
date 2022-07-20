@@ -92,6 +92,13 @@ class Email implements EmailInterface {
       "Your password reset token (valid for 10 min)"
     );
   }
+
+  async sendConfirmationCode(): Promise<void> {
+    await this.send(
+      "confirmation",
+      "This is the confirmation code for Kolynz technologies"
+    );
+  }
 }
 
 export default Email;

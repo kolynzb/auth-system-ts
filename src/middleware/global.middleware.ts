@@ -1,5 +1,4 @@
 import express from "express";
-import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
@@ -38,8 +37,6 @@ export default (app: express.Application): void => {
   // Body parser, reading data from body into req.body
   app.use(express.json({ limit: "10kb" }));
   app.use(express.urlencoded({ extended: true, limit: "10kb" }));
-
-  app.use(cookieParser());
 
   // Data sanitization against NoSQL query injection
   app.use(mongoSanitize());
