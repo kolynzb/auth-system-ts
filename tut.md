@@ -5,6 +5,8 @@
 - [local stratgy ](https://youtu.be/TE_gZdWNDyg)
 - [otp ](https://youtu.be/LYaPY7Tzeo4)
 - [passport](https://youtu.be/Jo8L8pru6ZI) 13:27
+- [jwt passport](https://youtu.be/zGPvjD6FISg)
+
 <!--
 http://localhost:3500/auth/register        <-- for register
 http://localhost:3500/auth/activate        <-- to activate user by sending code

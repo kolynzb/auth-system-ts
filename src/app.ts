@@ -8,7 +8,7 @@ import APIroutes from "./routes";
 
 import passport from "passport";
 import session from "express-session";
-import initializePassport from "./config/passport.config";
+import initializePassport from "./middleware/passport.middleware";
 import cookieParser from "cookie-parser";
 
 const app: express.Application = express();

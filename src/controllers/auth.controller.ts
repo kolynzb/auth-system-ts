@@ -2,6 +2,27 @@ import User from "../models/user.model";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
+import config from "config";
+import { ReqUser } from "../interfaces/auth.interface";
+import { Response } from "express";
+
+const login = async (req: ReqUser, res: Response) => {
+  try {
+    const token = jwt.sign(
+      {
+        userid: req.user!._id,
+        email: req.user!.email,
+        // role: req.user!.role,
+      },
+      config.get("JWT_SECRET"),
+      { expiresIn: "15d" }
+    );
+
+    res.status(200).json({ success: "Login successfull", token });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 const register = async (req, res) => {
   const { first_name, last_name, email, password } = req.body;
@@ -149,6 +170,7 @@ const sendConfirmationCode = (email: any, response: any) => {
 };
 
 export default {
+  login,
   register,
   resendActiveCode,
   handleActivation,

@@ -7,10 +7,7 @@ router.post("/register", authController.register);
 router.post("/activate", authController.handleActivation);
 router.get("/resendCode", authController.resendActiveCode);
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  console.log(req.user);
-  res.status(200).json({ success: "Login successfull" });
-});
+router.post("/login", passport.authenticate("local"), authController.login);
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
@@ -23,6 +20,7 @@ router.get("/login/success", (req, res) => {
   }
 });
 
+// Gooogle Login
 router.get(
   "/google",
   passport.authenticate("google", {
